@@ -53,22 +53,21 @@
 
     <view class="u-m-t-20">
       <up-cell-group>
-<!--        <up-cell icon="star" title="收藏(暂未开放)"></up-cell>-->
+        <up-cell icon="star" title="收藏(暂未开放)"></up-cell>
         <up-cell icon="photo" title="绘图历史" @click="handleGotoHistory"></up-cell>
-        <up-cell icon="setting" title="退出登录" @click="handleLoginOut">
-          <template #icon>
-            <tn-icon name="logout"/>
-          </template>
-        </up-cell>
-<!--        <up-cell icon="coupon" title="卡券(暂未开放)"></up-cell>-->
-<!--        <up-cell icon="heart" title="关注(暂未开放)"></up-cell>-->
+        <up-cell icon="coupon" title="卡券(暂未开放)"></up-cell>
+        <up-cell icon="heart" title="关注(暂未开放)"></up-cell>
       </up-cell-group>
     </view>
 
     <view class="u-m-t-20">
       <up-cell-group>
-<!--        <up-cell icon="setting" title="设置(暂未开放)"></up-cell>-->
-
+        <up-cell icon="setting" title="设置(暂未开放)"></up-cell>
+        <up-cell icon="setting" title="退出登录" @click="handleLoginOut">
+          <template #icon>
+            <tn-icon name="logout"/>
+          </template>
+        </up-cell>
       </up-cell-group>
     </view>
   </view>
@@ -103,8 +102,6 @@ import {EventType} from "@/types/event.types.ts";
 import UserMemberInfo from "@/components/home/UserMemberInfo.vue";
 
 const {user}=storeToRefs(useAppStore())
-const { getInviteCode } = useAppStore()
-
 const show = ref(true)
 const pic = ref('')
 function handleGotoHistory() {
@@ -145,7 +142,7 @@ const handleLogin=async ()=>{
 const handleLoginByWechat=()=>{
   uni.login({
     success: async function  ({code}) {
-      const result = await loginByWechatCode(code,getInviteCode())
+      const result = await loginByWechatCode(code)
       saveLoginInfo(result)
       uni.hideLoading()
     },

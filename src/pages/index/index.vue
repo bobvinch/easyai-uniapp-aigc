@@ -1,35 +1,27 @@
 <template>
   <BaseLayout>
-
-    <div class="size-16 bg-green-500"></div>
-
     <!--    首页-->
-    <Home />
+      <Home/>
   </BaseLayout>
 </template>
 
 <script setup lang="ts">
-import BaseLayout from '@/layouts/BaseLayout.vue'
-import Home from '@/pages/home/home.vue'
-import { onShareAppMessage, onShareTimeline } from '@dcloudio/uni-app'
-import { globalAppData } from '@/cofigs'
-import { useAppStore } from '@/stores'
 
-// 分享
-onShareAppMessage(() => {
-  const inviteCode = useAppStore().user.my_invite_code
-  // 在页面中定义分享方法
-  return {
-    title: globalAppData.share.appInfo,
-    path: `/pages/index/index?inviteCode=${inviteCode}`,
-  }
-})
-// 朋友圈
-onShareTimeline(() => {
-  const inviteCode = useAppStore().user.my_invite_code
-  return {
-    title: globalAppData.share.appInfo,
-    path: `/pages/index/index?inviteCode=${inviteCode}`,
-  }
-})
+import BaseLayout from "@/layouts/BaseLayout.vue";
+import Home from "@/pages/home/home.vue";
+import Creative from "@/pages/creative/creative.vue";
+import TaskExcuting from "@/components/common/TaskExcuting.vue";
+import BottomNavigation from "@/components/BottomNavigation.vue";
+
+import History from "@/pages/history/history.vue";
+import {storeToRefs} from "pinia";
+import {useAppStore} from "@/stores/appStore.ts";
+import {EventType} from "@/types/event.types.ts";
+import {on} from "@/utils/emitter.ts";
+import PaymentPopup from "@/components/home/PaymentPopup.vue";
+
+const {tabbarIndex} = storeToRefs(useAppStore())
+
+
+
 </script>

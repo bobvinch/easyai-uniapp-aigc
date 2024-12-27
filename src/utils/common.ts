@@ -52,20 +52,3 @@ export const randomId=(length=8) =>{
     }
     return randomString;
 }
-
-export const parseJSONToObject = <T>(json: string) => {
-    let msgObj;
-    try {
-        const parsedString = JSON.parse(json);
-        //需要经过两次转义
-        if(typeof parsedString==='string'){
-            msgObj=JSON.parse(parsedString)
-        }else {
-            msgObj=parsedString
-        }
-    } catch (err) {
-        console.error('not json')
-        return null;
-    }
-    return msgObj as T
-}

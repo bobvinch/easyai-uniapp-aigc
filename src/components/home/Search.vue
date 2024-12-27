@@ -4,11 +4,11 @@ import { ref } from 'vue'
 const searchValue = ref('')
 
 const searchInputEvent = (value: string) => {
-   
+  // eslint-disable-next-line no-console
   console.log('searchInputEvent', value)
 }
 const searchBtnClickEvent = (value: string) => {
-   
+  // eslint-disable-next-line no-console
   console.log('searchBtnClickEvent', value)
 }
 </script>
