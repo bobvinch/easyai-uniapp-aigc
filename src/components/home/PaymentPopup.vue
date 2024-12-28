@@ -56,13 +56,16 @@ defineEmits(['showPay'])
 
 const products=ref<IProduct[]>([])
 
-const handleInitDate=async () => {
+const handleInitData=async () => {
   const res = await getProductList()
   if (res) {
     products.value = res
   }
 }
-handleInitDate()
+
+onLoad(()=>{
+  handleInitData()
+})
 
 const selectedIndex =ref(0)
 watch(selectedIndex,()=>{

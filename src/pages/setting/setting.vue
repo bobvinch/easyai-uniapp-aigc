@@ -53,21 +53,22 @@
 
     <view class="u-m-t-20">
       <up-cell-group>
-        <up-cell icon="star" title="收藏(暂未开放)"></up-cell>
+<!--        <up-cell icon="star" title="收藏(暂未开放)"></up-cell>-->
         <up-cell icon="photo" title="绘图历史" @click="handleGotoHistory"></up-cell>
-        <up-cell icon="coupon" title="卡券(暂未开放)"></up-cell>
-        <up-cell icon="heart" title="关注(暂未开放)"></up-cell>
-      </up-cell-group>
-    </view>
-
-    <view class="u-m-t-20">
-      <up-cell-group>
-        <up-cell icon="setting" title="设置(暂未开放)"></up-cell>
         <up-cell icon="setting" title="退出登录" @click="handleLoginOut">
           <template #icon>
             <tn-icon name="logout"/>
           </template>
         </up-cell>
+<!--        <up-cell icon="coupon" title="卡券(暂未开放)"></up-cell>-->
+<!--        <up-cell icon="heart" title="关注(暂未开放)"></up-cell>-->
+      </up-cell-group>
+    </view>
+
+    <view class="u-m-t-20">
+      <up-cell-group>
+<!--        <up-cell icon="setting" title="设置(暂未开放)"></up-cell>-->
+
       </up-cell-group>
     </view>
   </view>
