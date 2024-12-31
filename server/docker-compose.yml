@@ -109,7 +109,7 @@ services:
   #  大语言模型数据库
   mysql:
     #阿里云镜像加速
-    image: registry.cn-shanghai.aliyuncs.com/comfy-ai/mysql-aliyun:5.7
+    image: registry.cn-shanghai.aliyuncs.com/comfy-ai/mysql-aliyun:latest
 #    image: mysql:5.7
     container_name: mysql
     healthcheck:
