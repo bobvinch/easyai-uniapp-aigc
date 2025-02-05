@@ -1,3 +1,5 @@
+import type { SocketInitOptions } from '@/composables/useWorkFlow.ts';
+
 /**
  * 绘图历史
  * @property _id 历史id
@@ -488,6 +490,7 @@ export interface IDrawResponse {
 export interface SocketState {
     socket: UniNamespace.SocketTask | null;   // WebSocket 实例或 null
     isInitialized:boolean
+    options?: SocketInitOptions;
     // isConnected: boolean;       // 是否已连接
     // isOpen: boolean;            // WebSocket 是否打开
     // isClosed: boolean;          // WebSocket 是否关闭
@@ -680,6 +683,31 @@ export interface IBanner {
     src: string;
     href: string;
     label: string;
+}
+
+/**
+ * WebSocket场景类型
+ * @enum IWebsocketSceneType
+ * @property wechatOfficialLogin - 微信公众号登录
+ * @property drawProcessPush - 绘图进度推送
+ * @property serverStatusPush - 服务器状态推送
+ * @property payStatusPush - 支付状态推送
+ */
+export const enum IWebsocketSceneType {
+    wechatOfficialLogin = 'wechatOfficialLogin',
+    drawProcessPush = 'drawProcessPush',
+    serverStatusPush = 'serverStatusPush',
+    payStatusPush = 'payStatusPush',
+}
+
+/**
+ * WebSocket参数
+ * @property type - 类型
+ * @property data - 数据
+ */
+export interface IWebSocketParams {
+    type: IWebsocketSceneType;
+    data?: { scene_str: string }
 }
 
 

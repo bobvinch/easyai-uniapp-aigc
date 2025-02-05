@@ -1,13 +1,13 @@
-import type {
-    IComfyUIProperties,
-    IComfyUIRequestParams,
-    IDrawHistoryItem,
-    IDrawHistoryItemCreat,
-    IDrawResponse,
-    IDrawTaskStatus,
-    IWorkFlow,
-    IWorkflowParam, SocketState
-} from "@/types";
+import {
+    type IComfyUIProperties,
+    type IComfyUIRequestParams,
+    type IDrawHistoryItem,
+    type IDrawHistoryItemCreat,
+    type IDrawResponse,
+    type IDrawTaskStatus, type IWebSocketParams, IWebsocketSceneType,
+    type IWorkFlow,
+    type IWorkflowParam, type SocketState,
+} from '@/types';
 import {computed, ref,inject} from 'vue'
 import {getBaseWsURL, request} from "@/utils/request.ts";
 import type {ParamToComponentMapping} from "@/pages/draw/apps/apps.vue";
@@ -16,18 +16,19 @@ import {storeToRefs} from "pinia";
 import {useAppStore} from "@/stores/appStore.ts";
 import {emit} from "@/utils/emitter.ts";
 import {EventType} from "@/types/event.types.ts";
+import { parseJSONToObject } from '@/utils/common.ts';
 
 export interface SocketInitOptions {
+    params?:IWebSocketParams
     forceReConnect?: boolean;
     onConnect?: () => void;
     onReconnect?: (attemptNumber: number) => void;
     onReconnectFailed?: () => void;
     onDisconnect?: (reason: string) => void;
-    onConnectError?: (error: Error) => void;
+    onConnectError?: (error: any) => void;
     onConnectTimeout?: () => void;
     onMessage?: (msg: any) => void;
     onPayMessage?: (msg: any) => void;
-    onError?: (message: string) => void;
 }
 
 /** 提交自定义工作流 */
@@ -130,20 +131,30 @@ export default function useWorkFlow() {
         })
     }
 
-    const socketInit = async () => {
+    const socketInit = async (options:SocketInitOptions= {params:{type:IWebsocketSceneType.drawProcessPush,data:{scene_str:''}}}) => {
         //如果未登录状态，不初始化WebSocket
         if(!isLogin.value){
             throw new Error('未登录状态，不允许初始化Websocket')
         }
-        console.log("socketState",socketState)
-        console.log('socket init executin，status',socketState.socket?.readyState)
-        if(socketState?.isInitialized){
+        console.log('socket init execution，status',socketState.socket?.readyState)
+        if(socketState?.isInitialized && socketState.options?.params?.type ===options.params?.type){
             console.log('WebSocket is already initialized');
             return;
         }
+        if(socketState?.isInitialized && socketState?.options.params?.type !==options.params?.type){
+            //说明场景不一样，需要重新初始化
+            console.log('WebSocket is already initialized,but scene is different,reinitialize')
+            await closeSocketAsync()
+            socketState.isInitialized=false
+        }
+
+
+        const { params}=options
+        const {type,data}=params as IWebSocketParams
+
         const {uniPlatform}=uni.getSystemInfoSync()
         socketState.socket= uni.connectSocket({
-            url: `${getBaseWsURL()}?user_id=${getLoginInfo()._id}&platform=${uniPlatform}`,
+            url: `${getBaseWsURL()}?user_id=${getLoginInfo()._id}&type=${type}&platform=${uniPlatform}&data=${data}`,
             complete:()=>{
                 console.log('WebSocket connect complete')
             }
@@ -151,17 +162,31 @@ export default function useWorkFlow() {
         socketState.isInitialized = true;
         uni.onSocketOpen((result) => {
             console.log('WebSocket opened',result);
-
+            // 保存options
+            socketState.options = options
+            if (options.onConnect){
+                options.onConnect()
+            }
         });
         uni.onSocketMessage((msg) => {
+            if (options.onMessage){
+                options.onMessage(msg.data)
+            }
             handleSocketMessage(msg.data);
         });
         uni.onSocketError((err) => {
             console.error('WebSocket onError',err);
+            socketState.isInitialized=false
+            if (options.onConnectError){
+                options.onConnectError(err)
+            }
         });
         uni.onSocketClose(()=>{
             socketState.isInitialized=false
             console.log('WebSocket onClose');
+            if (options.onDisconnect){
+                options.onDisconnect()
+            }
         })
     };
 
@@ -190,30 +215,14 @@ export default function useWorkFlow() {
     /** 处理Websocket消息 */
     const handleSocketMessage = (msg: any,callback?:(messageObj:any)=>void) => {
         console.log('原始消息', msg);
-        let msgObj;
-        try {
-            let parsedString = JSON.parse(msg);
-            //需要经过两次转义
-            if(typeof parsedString==='string'){
-                msgObj=JSON.parse(parsedString)
-            }else {
-                msgObj=parsedString
-            }
-        } catch (err) {
-            console.log('not json')
-        }
-        if (!msgObj) {
-            return;
-        }
+        const msgObj = parseJSONToObject<{type:any,data:any,queue_status:IDrawTaskStatus}>(msg)
         console.log('handleSocketMessage', msgObj);
         //自定义回调
         if(callback){
             callback(msgObj)
         }
-        const {type, data, queue_status} = msgObj as {type:any,data:any,queue_status:IDrawTaskStatus}
-        if(type==='pay_success'){
-            emit(EventType.PAY_SUCCESS, {order_id:msgObj.order_id})
-        }
+        const {type, data, queue_status} = msgObj
+
 
         if (queue_status) {
             // 从websocket消息中获取output

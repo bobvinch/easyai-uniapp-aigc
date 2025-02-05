@@ -5,7 +5,9 @@ import TaskExcuting from "@/components/common/TaskExcuting.vue";
 import BottomNavigation from "@/components/BottomNavigation.vue";
 import PaymentPopup from "@/components/home/PaymentPopup.vue";
 import MyBackToTop from "@/components/common/MyBackToTop.vue";
-
+import { storeToRefs } from 'pinia';
+import { useAppStore } from '@/stores/appStore.ts';
+const {showPay}=storeToRefs(useAppStore())
 
 
 </script>
@@ -15,7 +17,7 @@ import MyBackToTop from "@/components/common/MyBackToTop.vue";
     <slot></slot>
     <BottomNavigation/>
     <TaskExcuting/>
-    <PaymentPopup/>
+    <PaymentPopup v-if="showPay"/>
     <MyBackToTop/>
   </view>
 </template>

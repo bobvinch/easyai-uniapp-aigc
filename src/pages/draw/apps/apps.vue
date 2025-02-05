@@ -1,33 +1,28 @@
 <script setup lang="ts">
-import {computed, inject, onMounted, ref, nextTick} from "vue";
+import { computed, nextTick, ref } from 'vue';
 
 
-import BaseLayout from "@/layouts/BaseLayout.vue";
-import useWorkFlow from "@/composables/useWorkFlow.ts";
-import ImageUpload from "@/components/dynamic/ImageUpload.vue";
-import CustomSlider from "@/components/dynamic/CustomSlider.vue";
-import Height from "@/components/dynamic/Height.vue";
-import MyCard from "@/components/common/MyCard.vue";
-import {onLoad, onReady} from "@dcloudio/uni-app";
-import Positive from "@/components/dynamic/Positive.vue";
-import TnNavbar from '@tuniao/tnui-vue3-uniapp/components/navbar/src/navbar.vue'
-import MyTitle from "@/components/common/MyTitle.vue";
-import MyNavbar from "@/components/common/MyNavbar.vue";
-import Picker from "@/components/dynamic/Picker.vue";
-import CustomNumberBox from "@/components/dynamic/CustomNumberBox.vue";
-import Width from "@/components/dynamic/Width.vue";
-import Seed from "@/components/dynamic/Seed.vue";
-import ImageSelectPreview from "@/components/dynamic/ImageSelectPreview.vue";
-import type {IComfyUIProperties, IImageSelectItem} from "@/types";
-import ModeSelect from "@/components/dynamic/ModeSelect.vue";
-import MyPopup from "@/components/common/MyPopup.vue";
-import TaskProgress from "@/components/TaskProgress.vue";
-import TnIcon from '@tuniao/tnui-vue3-uniapp/components/icon/src/icon.vue'
-import TnSuspendButton from 'tnuiv3p-tn-suspend-button/index.vue'
-import {storeToRefs} from "pinia";
-import {useAppStore} from "@/stores/appStore.ts";
-import {randomId} from "@/utils/common.ts";
-import DragButton2 from "@/components/common/DragButton2.vue";
+import BaseLayout from '@/layouts/BaseLayout.vue';
+import useWorkFlow from '@/composables/useWorkFlow.ts';
+import ImageUpload from '@/components/dynamic/ImageUpload.vue';
+import CustomSlider from '@/components/dynamic/CustomSlider.vue';
+import Height from '@/components/dynamic/Height.vue';
+import { onLoad } from '@dcloudio/uni-app';
+import Positive from '@/components/dynamic/Positive.vue';
+import MyNavbar from '@/components/common/MyNavbar.vue';
+import Picker from '@/components/dynamic/Picker.vue';
+import CustomNumberBox from '@/components/dynamic/CustomNumberBox.vue';
+import Width from '@/components/dynamic/Width.vue';
+import Seed from '@/components/dynamic/Seed.vue';
+import ImageSelectPreview from '@/components/dynamic/ImageSelectPreview.vue';
+import { type IComfyUIProperties, IWebsocketSceneType } from '@/types';
+import ModeSelect from '@/components/dynamic/ModeSelect.vue';
+import TaskProgress from '@/components/TaskProgress.vue';
+import TnIcon from '@tuniao/tnui-vue3-uniapp/components/icon/src/icon.vue';
+import { storeToRefs } from 'pinia';
+import { useAppStore } from '@/stores/appStore.ts';
+import { randomId } from '@/utils/common.ts';
+import DragButton2 from '@/components/common/DragButton2.vue';
 
 /** 所有的组件 */
 const components = {
@@ -72,7 +67,11 @@ onLoad(async () => {
   const query = currentPage?.options; // 获取 query 参数
   workflowId.value = query.id
   handleGetWorkFlwById(query.id).then(() => console.log(workflow.value))
-  socketInit()
+  socketInit({
+    params:{
+      type:IWebsocketSceneType.drawProcessPush
+    }
+  })
 })
 
 

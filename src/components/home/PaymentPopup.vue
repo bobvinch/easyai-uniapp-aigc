@@ -1,16 +1,18 @@
 <script setup lang="ts">
-import {computed, ref, watch} from 'vue'
-import TnPopup from '@tuniao/tnui-vue3-uniapp/components/popup/src/popup.vue'
-import TnButton from '@tuniao/tnui-vue3-uniapp/components/button/src/button.vue'
-import TnScrollList from '@tuniao/tnui-vue3-uniapp/components/scroll-list/src/scroll-list.vue'
-import type {IProduct} from "@/types";
-import {getProductList, isLogin} from "@/composables/useCommon.ts";
-import TnIcon from "@tuniao/tnui-vue3-uniapp/components/icon/src/icon.vue";
-import {usePayHandlePayment} from "@/composables/usePayment.ts";
-import {onLoad, onReady, onShow} from "@dcloudio/uni-app";
-import useWorkFlow from "@/composables/useWorkFlow.ts";
-import {storeToRefs} from "pinia";
-import {useAppStore} from "@/stores/appStore.ts";
+import { computed, ref, watch } from 'vue';
+import TnPopup from '@tuniao/tnui-vue3-uniapp/components/popup/src/popup.vue';
+import TnScrollList from '@tuniao/tnui-vue3-uniapp/components/scroll-list/src/scroll-list.vue';
+import { type IProduct, IWebsocketSceneType } from '@/types';
+import { getProductList, isLogin } from '@/composables/useCommon.ts';
+import TnIcon from '@tuniao/tnui-vue3-uniapp/components/icon/src/icon.vue';
+import { usePayHandlePayment } from '@/composables/usePayment.ts';
+import { onLoad, onReady } from '@dcloudio/uni-app';
+import useWorkFlow from '@/composables/useWorkFlow.ts';
+import { storeToRefs } from 'pinia';
+import { useAppStore } from '@/stores/appStore.ts';
+import { emit } from '@/utils/emitter.ts';
+import { EventType } from '@/types/event.types.ts';
+import { parseJSONToObject } from '@/utils/common.ts';
 
 interface Props{
   title?:string;
@@ -63,10 +65,6 @@ const handleInitData=async () => {
   }
 }
 
-onLoad(()=>{
-  handleInitData()
-})
-
 const selectedIndex =ref(0)
 watch(selectedIndex,()=>{
   console.log(selectedIndex.value)
@@ -76,7 +74,21 @@ watch(selectedIndex,()=>{
 const {socketInit}=useWorkFlow()
 
 onReady(()=>{
-  socketInit()
+  handleInitData()
+  socketInit({
+    params:{
+      type:IWebsocketSceneType.payStatusPush
+    },
+    onMessage:(msg)=>{
+      console.log('handle pay success message');
+      const msgObj=parseJSONToObject<{type:string,order_id:string}>(msg)
+      const {type}=msgObj
+      if(type==='pay_success'){
+        showPay.value=false
+        emit(EventType.PAY_SUCCESS, {order_id:msgObj.order_id})
+      }
+    }
+  })
 })
 
 
@@ -95,7 +107,11 @@ const handlePayment =async ()=>{
     })
     return
   }
-  await socketInit()
+  await socketInit({
+    params:{
+      type:IWebsocketSceneType.payStatusPush
+    }
+  })
   usePayHandlePayment(products.value[selectedIndex.value])
 }
 
