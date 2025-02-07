@@ -38,7 +38,6 @@ services:
       comfyai:
         ipv4_address: 172.21.0.6
     depends_on:
-      - mysql
       - mongo
       - redis
     restart: always
@@ -63,24 +62,28 @@ services:
       #Token过期时间，单位秒
       - CONFIG_TOKEN_EXPIRE=${CONFIG_TOKEN_EXPIRE}
       - CONFIG_JWT_SECRET=${CONFIG_JWT_SECRET}
-
+    # 日志大小设置，避免日志文件过大
+    logging:
+      driver: "json-file"
+      options:
+        max-size: 100m
+        max-file: 10
   #  使用大语言模型的后端接口
   oneapi:
 #        提供oneapi的阿里云镜像下载地址，避免因为网络问题无法拉取镜像的问题
 #    image: justsong/one-api
     image: registry.cn-shanghai.aliyuncs.com/mynewkey/one-api:latest
-    container_name: oneapi-mysql
+    container_name: oneapi
     restart: always
     ports:
       - "${ONEAPI_PORT}:3000"
     networks:
       comfyai:
         ipv4_address: 172.21.0.5
-    depends_on:
-      - mysql
     environment:
-      - SQL_DSN=root:${MYSQL_ROOT_PASSWORD}@tcp(172.21.0.2:3306)/oneapi
       - TZ=Asia/Shanghai
+    volumes:
+      - oneapi_data:/data
   mongo:
     image: registry.cn-shanghai.aliyuncs.com/comfy-ai/mongo-aliyun:latest
 #    image: registry.cn-shanghai.aliyuncs.com/comfy-ai/mongo-aliyun:4.4
@@ -98,37 +101,14 @@ services:
       - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
       - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
     volumes:
-      - /usr/local/mongo/data:/data/db
+#      - /usr/local/mongo/data:/data/db
+      - mongo_data:/data/db  # 使用docker volume存储数据，提高性能，避免兼容性问题
     healthcheck:
-      test: [ "CMD", "mongo", "--eval", "db.runCommand({ connectionStatus: 1 })" ]
+      test: ["CMD", "bash", "-c", "echo > /dev/tcp/localhost/${MONGO_PORT}"]
       interval: 30s
       retries: 3
       timeout: 10s
-      start_period: 10s
-
-  #  大语言模型数据库
-  mysql:
-    #阿里云镜像加速
-    image: registry.cn-shanghai.aliyuncs.com/comfy-ai/mysql-aliyun:latest
-#    image: mysql:5.7
-    container_name: mysql
-    healthcheck:
-      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
-      interval: 30s
-      timeout: 10s
-      retries: 5
-    privileged: true
-    restart: unless-stopped
-    ports:
-      - "${MYSQL_PORT}:3306"
-    networks:
-      comfyai:
-        ipv4_address: 172.21.0.2
-    environment:
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-      - MYSQL_DATABASE=oneapi
-    volumes:
-      - mysql_data:/var/lib/mysql
+      start_period: 60s
   redis:
     image: registry.cn-shanghai.aliyuncs.com/comfy-ai/redis-aliyun:latest
     container_name: redis
@@ -152,8 +132,18 @@ services:
     networks:
       comfyai:
         ipv4_address: 172.21.0.9
+  portainer:
+    image: registry.cn-shanghai.aliyuncs.com/comfy-ai/portainer-ce:2.21.5
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+    ports:
+      - "${PORTAINER_PORT}:9000"
+      - "${PORTAINER_HTTPS_PORT}:9443"
 volumes:
-  mysql_data:
+  oneapi_data:
+  mongo_data:
+  portainer_data:
 networks:
   comfyai:
     driver: bridge
