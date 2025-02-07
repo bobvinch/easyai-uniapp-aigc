@@ -7,7 +7,7 @@ import useWorkFlow from '@/composables/useWorkFlow.ts';
 import ImageUpload from '@/components/dynamic/ImageUpload.vue';
 import CustomSlider from '@/components/dynamic/CustomSlider.vue';
 import Height from '@/components/dynamic/Height.vue';
-import { onLoad } from '@dcloudio/uni-app';
+import { onLoad, onShareAppMessage, onShareTimeline } from '@dcloudio/uni-app';
 import Positive from '@/components/dynamic/Positive.vue';
 import MyNavbar from '@/components/common/MyNavbar.vue';
 import Picker from '@/components/dynamic/Picker.vue';
@@ -178,6 +178,21 @@ const handToggelePregress=()=>{
 // 随机种子操作
 const seedRef=ref<any[]>([])
 
+
+// 分享
+onShareAppMessage(()=>{
+  return {
+    title:workflow.value.title,
+    path:'/pages/index/index'
+  }
+})
+// 朋友圈
+onShareTimeline(() => {
+  return {
+    title:workflow.value.description,
+    path:'/pages/index/index'
+  }
+})
 
 </script>
 

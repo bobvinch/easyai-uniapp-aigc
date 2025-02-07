@@ -52,7 +52,10 @@
     "mp-weixin" : {
         "appid" : "",
         "setting" : {
-            "urlCheck" : false
+            "urlCheck" : false,
+            "share": {
+                "enabled": true  // 开启分享
+            }
         },
         "usingComponents" : true,
         "mergeVirtualHostAttributes" : true

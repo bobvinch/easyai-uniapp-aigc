@@ -9,19 +9,22 @@
 
 import BaseLayout from "@/layouts/BaseLayout.vue";
 import Home from "@/pages/home/home.vue";
-import Creative from "@/pages/creative/creative.vue";
-import TaskExcuting from "@/components/common/TaskExcuting.vue";
-import BottomNavigation from "@/components/BottomNavigation.vue";
 
-import History from "@/pages/history/history.vue";
-import {storeToRefs} from "pinia";
-import {useAppStore} from "@/stores/appStore.ts";
-import {EventType} from "@/types/event.types.ts";
-import {on} from "@/utils/emitter.ts";
-import PaymentPopup from "@/components/home/PaymentPopup.vue";
+import { onShareAppMessage, onShareTimeline } from '@dcloudio/uni-app';
 
-const {tabbarIndex} = storeToRefs(useAppStore())
-
-
+// 分享
+onShareAppMessage(()=>{
+  return {
+    title:'这款全民使用的AI程序，简直好用到爆炸',
+    path:'/pages/index/index'
+  }
+})
+// 朋友圈
+onShareTimeline(() => {
+  return {
+    title:'这款全民使用的AI程序，简直好用到爆炸',
+    path:'/pages/index/index'
+  }
+})
 
 </script>

@@ -16,5 +16,9 @@ import AppSwiper from "@/components/home/AppSwiper.vue";
 import Search from "@/components/home/Search.vue";
 import AppTags from "@/components/home/AppTags.vue";
 import AppWaterFall from "@/components/home/AppWaterFall.vue";
+import { onShareAppMessage } from '@dcloudio/uni-app';
+
+
+
 
 </script>

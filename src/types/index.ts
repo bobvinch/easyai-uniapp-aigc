@@ -390,19 +390,28 @@ export enum ICommentTypeEnum {
     work = 'work', // 作品
 }
 
+/** 动态组件的属性 */
+export interface IDynamicProps{
+    title?: string
+    options?:IDynamicOptions
+}
+
+
+
 /** 动态参数 */
 export interface IDynamicOptions{
-    min?:number
+    min:number
     max?:number
     step?:number
     hint?:string
     required?:boolean
+    seedLength?:number   //随机种子的长度
     imageSelectItems?:IImageSelectItem[]
-    selectItems?:ISlectOption[]
+    selectItems?:ISelectOption[]
 }
 
 /** picker 选项 */
-export interface ISlectOption{
+export interface ISelectOption{
     label:string
     value:string | number | boolean
 }

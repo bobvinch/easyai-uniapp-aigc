@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {provide,reactive} from 'vue'
-import {onHide, onLoad, onShow} from "@dcloudio/uni-app";
+import { onHide, onLoad, onShareAppMessage, onShareTimeline, onShow } from '@dcloudio/uni-app';
 import {useAppStore} from "@/stores/appStore.ts";
 import type {SocketState} from "@/types";
 
@@ -27,7 +27,6 @@ provide<SocketState>('socketState',socketState)
 const {uniPlatform}=uni.getSystemInfoSync()
 
 console.log('平台信息',uniPlatform)
-
 
 
 </script>
