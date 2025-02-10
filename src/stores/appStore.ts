@@ -15,20 +15,20 @@ export const useAppStore = defineStore('app', {
         user:{} as User,
         localTasks: [] as (IDrawHistoryItem & Omit<IDrawTaskStatus, 'status'> & { abortController?: AbortController })[],    //本地的任务
 
-        //     展示支付页面
-        showPay: false,
-    }),
-    actions: {
-        init(){
-            this.getUser()
-        },
-        toggleShowExecuting() {
-            this.showExecuting = !this.showExecuting;
-        },
-        async initWorkFlows_All() {
-            this.workflows_all = await getApps()
-        },
-        setUser(user:Partial<User>){
+          //     展示支付页面
+          showPay: false,
+        }),
+  actions: {
+      init(){
+    this.getUser()
+},
+toggleShowExecuting() {
+    this.showExecuting = !this.showExecuting;
+},
+async initWorkFlows_All() {
+    this.workflows_all = await getApps()
+},
+setUser(user:Partial<User>){
             this.user={...this.user,...user}   //避免覆盖其他属性
             uni.setStorageSync('user',JSON.stringify(this.user))
         },
