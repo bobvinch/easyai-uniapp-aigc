@@ -1,66 +1,16 @@
 {
-	"easycom": {
-		"autoscan": true,
-		// 注意一定要放在custom里，否则无效，https://ask.dcloud.net.cn/question/131175
-		"custom": {
-			"^u--(.*)": "uview-plus/components/u-$1/u-$1.vue",
-			"^up-(.*)": "uview-plus/components/u-$1/u-$1.vue",
-			"^u-([^-].*)": "uview-plus/components/u-$1/u-$1.vue",
-			"^tn-(.*)-(item|group)$": "@tuniao/tnui-vue3-uniapp/components/$1/src/$1-$2.vue",
-			"^tn-(.*)": "@tuniao/tnui-vue3-uniapp/components/$1/src/$1.vue"
-		}
-	},
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
 			"path": "pages/index/index",
 			"style": {
-				"navigationBarTitleText": "EasyAI",
-				"backgroundColor": "#F6F7FA",
-				"enablePullDownRefresh": true
-			}
-
-		},
-		{
-			"path": "pages/creative/creative",
-			"style": {
-				"navigationBarTitleText": "EasyAI",
-				"backgroundColor": "#F6F7FA"
-			}
-		},
-		{
-			"path": "pages/home/home",
-			"style": {
-				"navigationBarTitleText": "EasyAI",
-				"backgroundColor": "#F6F7FA"
-			}
-		},
-		{
-			"path": "pages/setting/setting",
-			"style": {
-				"navigationBarTitleText": "EasyAI",
-				"backgroundColor": "#F6F7FA"
-			}
-		},
-		{
-			"path": "pages/history/history",
-			"style": {
-				"navigationBarTitleText": "EasyAI",
-				"backgroundColor": "#F6F7FA"
-			}
-		},
-		{
-			"path": "pages/draw/apps/apps",
-			"style": {
-				"navigationBarTitleText": "EasyAI",
-				"backgroundColor": "#F6F7FA"
+				"navigationBarTitleText": "uni-app"
 			}
 		}
 	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "EasyAI",
-		"navigationStyle": "custom",
+		"navigationBarTitleText": "uni-app",
 		"navigationBarBackgroundColor": "#F8F8F8",
-		"backgroundColor": "#F6F7FA"
+		"backgroundColor": "#F8F8F8"
 	}
 }

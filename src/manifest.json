@@ -51,15 +51,10 @@
     /* 小程序特有相关 */
     "mp-weixin" : {
         "appid" : "",
-        "postcss": true,
         "setting" : {
-            "urlCheck" : false,
-            "share": {
-                "enabled": false  // 涉及邀请码，关闭全局分享
-            }
+            "urlCheck" : false
         },
-        "usingComponents" : true,
-        "mergeVirtualHostAttributes" : true
+        "usingComponents" : true
     },
     "mp-alipay" : {
         "usingComponents" : true
