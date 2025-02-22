@@ -54,8 +54,7 @@
         "setting" : {
             "urlCheck" : false
         },
-        "usingComponents" : true,
-        "mergeVirtualHostAttributes" : true
+        "usingComponents" : true
     },
     "mp-alipay" : {
         "usingComponents" : true
