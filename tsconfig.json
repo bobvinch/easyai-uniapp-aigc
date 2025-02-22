@@ -7,11 +7,7 @@
       "@/*": ["./src/*"]
     },
     "lib": ["esnext", "dom"],
-    "types": [
-      "@dcloudio/types",
-      "uview-plus/types",
-      "@tuniao/tnui-vue3-uniapp/global.d.ts"
-    ]
+    "types": ["@dcloudio/types"]
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"]
 }
