@@ -36,7 +36,8 @@
     "up:pkg": "pnpm up -rLi \"!@dcloudio/*\"",
     "up:uniapp": "pnpx @dcloudio/uvm@latest",
     "open:dev": "weapp open -p dist/dev/mp-weixin",
-    "open:build": "weapp open -p dist/build/mp-weixin"
+    "open:build": "weapp open -p dist/build/mp-weixin",
+    "postinstall": "weapp-tw patch"
   },
   "dependencies": {
     "@dcloudio/uni-app": "3.0.0-4040520250104002",
@@ -71,6 +72,11 @@
     "vite": "5.2.8",
     "vue-tsc": "^2.2.8",
     "weapp-ide-cli": "^2.0.10",
-    "weapp-tailwindcss": "^4.0.8"
+    "weapp-tailwindcss": "^4.0.9"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "weapp-tailwindcss"
+    ]
   }
 }
