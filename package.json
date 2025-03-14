@@ -55,7 +55,7 @@
     "@dcloudio/uni-mp-weixin": "3.0.0-4040520250104002",
     "@dcloudio/uni-mp-xhs": "3.0.0-4040520250104002",
     "@dcloudio/uni-quickapp-webview": "3.0.0-4040520250104002",
-    "@weapp-tailwindcss/merge": "^1.0.5",
+    "@weapp-tailwindcss/merge": "^1.0.7",
     "vue": "^3.5.13",
     "vue-i18n": "^9.14.2"
   },
@@ -65,15 +65,15 @@
     "@dcloudio/uni-cli-shared": "3.0.0-4040520250104002",
     "@dcloudio/uni-stacktracey": "3.0.0-4040520250104002",
     "@dcloudio/vite-plugin-uni": "3.0.0-4040520250104002",
-    "@tailwindcss/vite": "^4.0.10",
+    "@tailwindcss/vite": "^4.0.14",
     "@vue/runtime-core": "^3.5.13",
     "@vue/tsconfig": "^0.7.0",
-    "tailwindcss": "^4.0.10",
+    "tailwindcss": "^4.0.14",
     "typescript": "^5.8.2",
     "vite": "5.2.8",
     "vue-tsc": "^2.2.8",
     "weapp-ide-cli": "^2.0.10",
-    "weapp-tailwindcss": "^4.0.10"
+    "weapp-tailwindcss": "^4.1.0"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
