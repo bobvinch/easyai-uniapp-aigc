@@ -1,62 +1,48 @@
 <template>
   <BaseLayout>
-
     <view class="main-container">
       <!--首页轮播图-->
-      <TnTitle title="上传图片" mode="vLine"/>
+      <TnTitle title="上传图片" mode="vLine" />
 
-
-      <TnTitle title="提示词"  mode="vLine"/>
-      <up-textarea v-model="value1" placeholder="请输入提示词"/>
-
-
+      <TnTitle title="提示词" mode="vLine" />
+      <up-textarea v-model="value1" placeholder="请输入提示词" />
     </view>
-    <GetUserInfoPopup/>
+    <GetUserInfoPopup />
   </BaseLayout>
 </template>
 
 <script setup lang="ts">
-import BaseLayout from "@/layouts/BaseLayout.vue";
-import GetUserInfoPopup from "@/components/GetUserInfoPopup.vue";
+import BaseLayout from '@/layouts/BaseLayout.vue'
+import GetUserInfoPopup from '@/components/GetUserInfoPopup.vue'
 import TnTitle from '@tuniao/tnui-vue3-uniapp/components/title/src/title.vue'
 
-
-
-
-import {useAppStore} from "@/stores/appStore.ts";
-import {ref} from 'vue';
-import { onShareAppMessage, onShareTimeline } from '@dcloudio/uni-app';
+import { useAppStore } from '@/stores/appStore.ts'
+import { ref } from 'vue'
 
 const title = 'EasyAI'
 const value1 = ref('22222222222222222')
 
-
-const {toggleShowExecuting}=useAppStore()
-const handleSubmitTask =async () => {
-  const userinfo=await uni.getUserInfo()
-  console.log("userinfo",userinfo)
+const { toggleShowExecuting } = useAppStore()
+const handleSubmitTask = async () => {
+  const userinfo = await uni.getUserInfo()
+  console.log('userinfo', userinfo)
   // 请求登录
   uni.login({
     provider: 'weixin',
-    success: (res) => {
-      console.log(res);
+    success: res => {
+      console.log(res)
     },
-    fail: (err) => {
-      console.log(err);
+    fail: err => {
+      console.log(err)
     },
   })
   console.log(value1.value)
   toggleShowExecuting()
 }
-
-
-
-
-
 </script>
 
 <style scoped lang="scss">
-.main-container{
+.main-container {
   padding: 4px;
 }
 .content {
@@ -74,7 +60,6 @@ const handleSubmitTask =async () => {
   margin-right: auto;
   margin-bottom: 50rpx;
 }
-
 
 .title {
   font-size: 36rpx;

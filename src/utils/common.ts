@@ -56,7 +56,7 @@ export const randomId=(length=8) =>{
 export const parseJSONToObject = <T>(json: string) => {
     let msgObj;
     try {
-        let parsedString = JSON.parse(json);
+        const parsedString = JSON.parse(json);
         //需要经过两次转义
         if(typeof parsedString==='string'){
             msgObj=JSON.parse(parsedString)
