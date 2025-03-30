@@ -7,9 +7,12 @@
     <view :class="className">
       {{ className }}
     </view>
-    <IceButton custom-class="bg-amber-600">
-      获取值
-    </IceButton>
+    <view>
+      <IceButton custom-class="bg-amber-600">
+        获取值
+      </IceButton>
+    </view>
+
   </view>
 </template>
 
@@ -17,7 +20,5 @@
 import IceButton from '@/components/IceButton.vue'
 import { ref } from 'vue'
 const title = ref('Hello')
-const className = ref('bg-[#00aa55]')
+const className = ref('bg-[#00aa55] mb-[20rpx] p-[20rpx]')
 </script>
-
-

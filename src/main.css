@@ -1,4 +1,9 @@
-@import "weapp-tailwindcss";
+@layer theme, base, components, utilities;
+
+@import 'weapp-tailwindcss/theme.css' layer(theme);
+/* @import './preflight.css' layer(base); */
+@import 'weapp-tailwindcss/utilities.css' layer(utilities);
+
 
 @layer components {
     .reset-button {
