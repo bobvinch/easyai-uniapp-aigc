@@ -19,4 +19,3 @@ const className = computed(() => {
 
 </script>
 
-<style></style>

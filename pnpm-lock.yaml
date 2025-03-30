@@ -103,8 +103,8 @@ importers:
         specifier: ^2.0.10
         version: 2.0.10
       weapp-tailwindcss:
-        specifier: ^4.1.1
-        version: 4.1.1(tailwindcss@4.0.17)
+        specifier: ^4.1.2
+        version: 4.1.2(tailwindcss@4.0.17)
 
 packages:
 
@@ -1953,8 +1953,8 @@ packages:
   '@weapp-tailwindcss/merge@1.0.7':
     resolution: {integrity: sha512-2C8lKfalHUHJl21TUFF9EBBi5HmmJMMm1SNPwgfMB3GY/+oDPFn9uW3J6TAU6YZubGXXd9RreQqBs2JK1RrlJA==}
 
-  '@weapp-tailwindcss/postcss@1.0.7':
-    resolution: {integrity: sha512-UZM2hSqa+Mrfd2OkDb0UFv6sBxIslBI0/1hZtPjg1NFY7tu0Pj0oiXy9BfAHjZlU+DzaywcoUzPK8zji+Tqafw==}
+  '@weapp-tailwindcss/postcss@1.0.8':
+    resolution: {integrity: sha512-auD1odNl9qwlZrttZeznn6d3EorRSZp+1OmoeAbLZSVW5YefJIS1RoKc88a95eL8C1ew94ZDRkNeF1hzZbNcew==}
 
   '@weapp-tailwindcss/shared@1.0.2':
     resolution: {integrity: sha512-kIMRqDMGpFU26BOc5WS1+eEOqyUIOuE8NwS377jrJRL2dEvWDb8g9PSLdg6/oS0OXvwb8W0VhVpq4ZUlUcK95w==}
@@ -4537,8 +4537,8 @@ packages:
     resolution: {integrity: sha512-aJVO3dceQAXmo/oJmQlQwsNvwa2soCrXZH95nERoiIoNSoQ4LM2vQosH2QNqtIJW/NSlbdE8B8sU9/19OAUwMA==}
     hasBin: true
 
-  weapp-tailwindcss@4.1.1:
-    resolution: {integrity: sha512-6waCN3X1nI4f7FD1FcAyVDRmAQRZNefAU2zsbkKIS4MCgc4xqiUAVNoc5jDV54aJFrckD1aMbSjJ5Wve+t8aHg==}
+  weapp-tailwindcss@4.1.2:
+    resolution: {integrity: sha512-77fFO0qOsSGzAItAXFdcgMSwk1U4DjqIf+LuJOrPOYYYwX3nnDq7kkrQQ2toVF5Dipta4ZuhmsfUA4lmlYmXNg==}
     engines: {node: ^18.17.0 || >=20.5.0}
     hasBin: true
 
@@ -7363,7 +7363,7 @@ snapshots:
       tailwind-merge: 3.0.2
       tailwind-merge-v2: tailwind-merge@2.6.0
 
-  '@weapp-tailwindcss/postcss@1.0.7':
+  '@weapp-tailwindcss/postcss@1.0.8':
     dependencies:
       '@weapp-core/escape': 4.0.1
       '@weapp-tailwindcss/shared': 1.0.2
@@ -10246,7 +10246,7 @@ snapshots:
       fs-extra: 11.3.0
       pathe: 2.0.3
 
-  weapp-tailwindcss@4.1.1(tailwindcss@4.0.17):
+  weapp-tailwindcss@4.1.2(tailwindcss@4.0.17):
     dependencies:
       '@ast-core/escape': 1.0.1
       '@babel/parser': 7.27.0
@@ -10257,7 +10257,7 @@ snapshots:
       '@weapp-tailwindcss/init': 1.0.2
       '@weapp-tailwindcss/logger': 1.0.1
       '@weapp-tailwindcss/mangle': 1.0.3
-      '@weapp-tailwindcss/postcss': 1.0.7
+      '@weapp-tailwindcss/postcss': 1.0.8
       '@weapp-tailwindcss/shared': 1.0.2
       debug: 4.4.0
       htmlparser2: 10.0.0

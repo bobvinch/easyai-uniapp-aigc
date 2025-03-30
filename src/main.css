@@ -1,20 +1,13 @@
-@layer theme, base, components, utilities;
+.reset-button {
+    padding: 0;
+    background-color: transparent;
+    font-size: inherit;
+    line-height: inherit;
+    color: inherit;
 
-@import 'weapp-tailwindcss/theme.css' layer(theme);
-/* @import './preflight.css' layer(base); */
-@import 'weapp-tailwindcss/utilities.css' layer(utilities);
-
-
-@layer components {
-    .reset-button {
-        padding: 0;
-        background-color: transparent;
-        font-size: inherit;
-        line-height: inherit;
-        color: inherit;
-
-        &::after {
-            border: none;
-        }
+    &::after {
+        border: none;
     }
 }
+
+@import 'weapp-tailwindcss';
