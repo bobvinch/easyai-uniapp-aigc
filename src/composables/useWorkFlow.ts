@@ -12,14 +12,11 @@ import {
   type SocketState,
 } from '@/types'
 import { computed, ref, inject } from 'vue'
-import { getBaseWsURL, request } from '@/utils/request.ts'
 import type { ParamToComponentMapping } from '@/pages/draw/apps/apps.vue'
-import { getLoginInfo, isLogin, refreshUserInfo } from '@/composables/useCommon.ts'
 import { storeToRefs } from 'pinia'
-import { useAppStore } from '@/stores/appStore.ts'
-import { emit } from '@/utils/emitter.ts'
-import { EventType } from '@/types/event.types.ts'
-import { parseJSONToObject } from '@/utils/common.ts'
+import { getBaseWsURL, parseJSONToObject, request } from '@/utils'
+import { useAppStore } from '@/stores'
+import { getLoginInfo, isLogin, refreshUserInfo } from '@/composables'
 
 export interface SocketInitOptions {
   params?: IWebSocketParams

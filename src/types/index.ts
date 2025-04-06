@@ -1,4 +1,5 @@
 import type { SocketInitOptions } from '@/composables/useWorkFlow.ts'
+export * from './event.types.ts'
 
 /**
  * 绘图历史

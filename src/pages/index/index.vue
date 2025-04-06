@@ -1,30 +1,33 @@
 <template>
   <BaseLayout>
     <!--    首页-->
-      <Home/>
+    <Home />
   </BaseLayout>
 </template>
 
 <script setup lang="ts">
+import BaseLayout from '@/layouts/BaseLayout.vue'
+import Home from '@/pages/home/home.vue'
+import { useAppStore } from '@/stores'
 
-import BaseLayout from "@/layouts/BaseLayout.vue";
-import Home from "@/pages/home/home.vue";
-
-import { onShareAppMessage, onShareTimeline } from '@dcloudio/uni-app';
+import { onShareAppMessage, onShareTimeline } from '@dcloudio/uni-app'
+import { globalAppData } from '@/cofigs'
 
 // 分享
-onShareAppMessage(()=>{
+onShareAppMessage(() => {
+  const inviteCode = useAppStore().user.my_invite_code
+  // 在页面中定义分享方法
   return {
-    title:'这款全民使用的AI程序，简直好用到爆炸',
-    path:'/pages/index/index'
+    title: globalAppData.share.appInfo,
+    path: `/pages/index/index?inviteCode=${inviteCode}`,
   }
 })
 // 朋友圈
 onShareTimeline(() => {
+  const inviteCode = useAppStore().user.my_invite_code
   return {
-    title:'这款全民使用的AI程序，简直好用到爆炸',
-    path:'/pages/index/index'
+    title: globalAppData.share.appInfo,
+    path: `/pages/index/index?inviteCode=${inviteCode}`,
   }
 })
-
 </script>

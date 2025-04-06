@@ -51,10 +51,11 @@
     /* 小程序特有相关 */
     "mp-weixin" : {
         "appid" : "",
+        "postcss": true,
         "setting" : {
             "urlCheck" : false,
             "share": {
-                "enabled": true  // 开启分享
+                "enabled": false  // 涉及邀请码，关闭全局分享
             }
         },
         "usingComponents" : true,
