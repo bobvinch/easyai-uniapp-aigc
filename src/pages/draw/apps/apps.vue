@@ -81,7 +81,7 @@ const currentProgress = computed(() => {
   if (!executeTask) {
     return '空闲'
   }
-  return executeTask.progress + '%'
+  return executeTask.progress?executeTask.progress + '%':'0%'
 })
 
 // 定义动画相关的响应式数据
