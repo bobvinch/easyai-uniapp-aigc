@@ -4,16 +4,7 @@ import { onHide, onLoad, onShareAppMessage, onShareTimeline, onShow } from '@dcl
 import { useAppStore } from '@/stores/appStore.ts'
 import type { SocketState } from '@/types'
 
-onLoad(options => {
-  console.log('App onLoad,options is:', options)
-  if (options?.inviteCode) {
-    useAppStore().setInviteCode(options.inviteCode)
-  }
 
-  // on(EventType.AUTH_LOGOUT,()=>{
-  //   console.log('退出登录事件')
-  // })
-})
 onShow(() => {
   console.log('App onShow')
 })

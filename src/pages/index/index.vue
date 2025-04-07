@@ -8,10 +8,9 @@
 <script setup lang="ts">
 import BaseLayout from '@/layouts/BaseLayout.vue'
 import Home from '@/pages/home/home.vue'
-import { useAppStore } from '@/stores'
-
 import { onShareAppMessage, onShareTimeline } from '@dcloudio/uni-app'
 import { globalAppData } from '@/cofigs'
+import { useAppStore } from '@/stores'
 
 // 分享
 onShareAppMessage(() => {

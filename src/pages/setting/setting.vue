@@ -103,6 +103,8 @@ import {EventType} from "@/types/event.types.ts";
 import UserMemberInfo from "@/components/home/UserMemberInfo.vue";
 
 const {user}=storeToRefs(useAppStore())
+const { getInviteCode } = useAppStore()
+
 const show = ref(true)
 const pic = ref('')
 function handleGotoHistory() {
@@ -143,7 +145,7 @@ const handleLogin=async ()=>{
 const handleLoginByWechat=()=>{
   uni.login({
     success: async function  ({code}) {
-      const result = await loginByWechatCode(code)
+      const result = await loginByWechatCode(code,getInviteCode())
       saveLoginInfo(result)
       uni.hideLoading()
     },
