@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import TnSwiper from '@tuniao/tnui-vue3-uniapp/components/swiper/src/swiper.vue'
+import {ref, reactive, computed} from 'vue'
 import type {IBanner, IMiniProgramContent} from "@/types";
 import {getPageContent} from "@/composables/useCommon.ts";
 import {onLoad} from "@dcloudio/uni-app";
