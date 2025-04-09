@@ -64,10 +64,8 @@ export const parseJSONToObject = <T>(json: string) => {
             msgObj=parsedString
         }
     } catch (err) {
-        throw new Error('not json')
-    }
-    if (!msgObj) {
-        throw new Error('not json')
+        console.error('not json')
+        return null;
     }
     return msgObj as T
 }

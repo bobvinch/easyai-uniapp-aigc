@@ -69,22 +69,7 @@ export default function useWorkFlow() {
       param: 'advance_select_image_preview',
       component: 'ImageSelectPreview',
       title: '高级-图像预览选择',
-    },
-    {
-      param: 'advance_select_image_preview_2',
-      component: 'ImageSelectPreview',
-      title: '高级-图像预览选择',
-    },
-    {
-      param: 'advance_select_image_preview_3',
-      component: 'ImageSelectPreview',
-      title: '高级-图像预览选择',
-    },
-    {
-      param: 'advance_select_image_preview_4',
-      component: 'ImageSelectPreview',
-      title: '高级-图像预览选择',
-    },
+    }
   ] as ParamToComponentMapping[]
   /** 绘图参数 */
   const bindParam = ref<IComfyUIProperties>({})
@@ -238,6 +223,7 @@ export default function useWorkFlow() {
     const msgObj = parseJSONToObject<{ type: never; data: never; queue_status: IDrawTaskStatus }>(
       msg
     )
+    if(!msgObj) return;
     //自定义回调
     if (callback) {
       callback(msgObj)

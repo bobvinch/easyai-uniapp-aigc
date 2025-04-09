@@ -25,5 +25,13 @@ export default defineConfig(async () => {
         }
       )
     ],
+    css:{
+      preprocessorOptions: {
+        scss: {
+          // additionalData: `$u-primary: #8d1520;`
+          // additionalData: '@import "@/styles/theme.scss";'
+        }
+      },
+    }
   }
 });

@@ -132,7 +132,6 @@ console.log('graphicDatas:', graphicDatas)
 .image-data {
   width: calc(100% - 20rpx);
   margin: 10rpx;
-
   .image {
     width: 100%;
     height: auto;
