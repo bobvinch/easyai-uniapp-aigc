@@ -1,30 +1,35 @@
 <template>
-  <view class="flex flex-col items-center justify-center space-y-4">
-    <image class="w-20 h-20 mt-4" src="/static/logo.png" />
-    <view class="text-area">
-      <text class="text-[#00f285] text-[88rpx] font-bold underline">{{ title }}</text>
-    </view>
-    <view :class="className" class="text-white rounded-md">
-      欢迎使用 weapp-tailwindcss uni-app 模板
-    </view>
-    <view>
-      <IceButton custom-class="bg-amber-600">
-        获取值
-      </IceButton>
-    </view>
+  <BaseLayout>
 
-  </view>
+    <div class="size-16 bg-green-500"></div>
+
+    <!--    首页-->
+    <Home />
+  </BaseLayout>
 </template>
 
 <script setup lang="ts">
-import IceButton from '@/components/IceButton.vue'
-import { ref } from 'vue'
-const title = ref('Hello')
-const className = ref('bg-[#00aa55] mb-[20rpx] p-[20rpx]')
-</script>
+import BaseLayout from '@/layouts/BaseLayout.vue'
+import Home from '@/pages/home/home.vue'
+import { onShareAppMessage, onShareTimeline } from '@dcloudio/uni-app'
+import { globalAppData } from '@/cofigs'
+import { useAppStore } from '@/stores'
 
-<style>
-.text-area{
-  padding: 40rpx;
-}
-</style>
+// 分享
+onShareAppMessage(() => {
+  const inviteCode = useAppStore().user.my_invite_code
+  // 在页面中定义分享方法
+  return {
+    title: globalAppData.share.appInfo,
+    path: `/pages/index/index?inviteCode=${inviteCode}`,
+  }
+})
+// 朋友圈
+onShareTimeline(() => {
+  const inviteCode = useAppStore().user.my_invite_code
+  return {
+    title: globalAppData.share.appInfo,
+    path: `/pages/index/index?inviteCode=${inviteCode}`,
+  }
+})
+</script>
