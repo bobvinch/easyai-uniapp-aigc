@@ -1,21 +1,13 @@
-# Logs
-logs
-*.log
+/tmp
+/out-tsc
+
+/node_modules
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
+/.pnp
+.pnp.js
 
-node_modules
-.DS_Store
-dist
-*.local
-
-# Editor directories and files
-.idea
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
+.vscode/*
+# 项目排除路径
+/dist/

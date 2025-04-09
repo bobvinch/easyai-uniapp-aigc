@@ -1,8 +1,5 @@
 <template>
   <BaseLayout>
-
-    <div class="size-16 bg-green-500"></div>
-
     <!--    首页-->
     <Home />
   </BaseLayout>
@@ -21,7 +18,7 @@ onShareAppMessage(() => {
   // 在页面中定义分享方法
   return {
     title: globalAppData.share.appInfo,
-    path: `/pages/index/index?inviteCode=${inviteCode}`,
+    path: `/pages/index/index?inviteCode=${inviteCode}`
   }
 })
 // 朋友圈
@@ -29,7 +26,7 @@ onShareTimeline(() => {
   const inviteCode = useAppStore().user.my_invite_code
   return {
     title: globalAppData.share.appInfo,
-    path: `/pages/index/index?inviteCode=${inviteCode}`,
+    path: `/pages/index/index?inviteCode=${inviteCode}`
   }
 })
 </script>

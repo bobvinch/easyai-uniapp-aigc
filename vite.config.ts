@@ -1,12 +1,12 @@
-import { defineConfig } from "vite";
+import { defineConfig } from 'vite'
 import process from 'node:process'
-
 const isH5 = process.env.UNI_PLATFORM === 'h5'
 const isApp = process.env.UNI_PLATFORM === 'app'
 const WeappTailwindcssDisabled = isH5 || isApp
-import uni from "@dcloudio/vite-plugin-uni";
+import uni from '@dcloudio/vite-plugin-uni'
 import { UnifiedViteWeappTailwindcssPlugin } from 'weapp-tailwindcss/vite'
 // import tailwindcss from '@tailwindcss/vite'
+import AutoImport from 'unplugin-auto-import/vite'
 
 // https://vitejs.dev/config/
 export default defineConfig(async () => {
@@ -18,20 +18,25 @@ export default defineConfig(async () => {
       // 以默认的 cjs 方式加载，报错
       // Failed to resolve "@tailwindcss/vite". This package is ESM only but it was tried to load by `require`
       tailwindcss(),
-      UnifiedViteWeappTailwindcssPlugin(
-        {
-          rem2rpx: true,
-          disabled: WeappTailwindcssDisabled
+      UnifiedViteWeappTailwindcssPlugin({
+        rem2rpx: true,
+        disabled: WeappTailwindcssDisabled
+      }),
+      AutoImport({
+        imports: ['vue', 'uni-app', 'pinia'],
+        dts: './src/auto-imports.d.ts',
+        eslintrc: {
+          enabled: true
         }
-      )
+      })
     ],
-    css:{
+    css: {
       preprocessorOptions: {
         scss: {
           // additionalData: `$u-primary: #8d1520;`
           // additionalData: '@import "@/styles/theme.scss";'
         }
-      },
+      }
     }
   }
-});
+})
