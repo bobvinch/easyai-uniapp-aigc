@@ -1,41 +1,35 @@
 <template>
-  <view class="content">
-    <image class="logo" src="/static/logo.png" />
-    <view class="text-area">
-      <text class="title">{{ title }}</text>
-    </view>
-  </view>
+  <BaseLayout>
+
+    <div class="size-16 bg-green-500"></div>
+
+    <!--    首页-->
+    <Home />
+  </BaseLayout>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-const title = ref('Hello')
+import BaseLayout from '@/layouts/BaseLayout.vue'
+import Home from '@/pages/home/home.vue'
+import { onShareAppMessage, onShareTimeline } from '@dcloudio/uni-app'
+import { globalAppData } from '@/cofigs'
+import { useAppStore } from '@/stores'
+
+// 分享
+onShareAppMessage(() => {
+  const inviteCode = useAppStore().user.my_invite_code
+  // 在页面中定义分享方法
+  return {
+    title: globalAppData.share.appInfo,
+    path: `/pages/index/index?inviteCode=${inviteCode}`,
+  }
+})
+// 朋友圈
+onShareTimeline(() => {
+  const inviteCode = useAppStore().user.my_invite_code
+  return {
+    title: globalAppData.share.appInfo,
+    path: `/pages/index/index?inviteCode=${inviteCode}`,
+  }
+})
 </script>
-
-<style>
-.content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.logo {
-  height: 200rpx;
-  width: 200rpx;
-  margin-top: 200rpx;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 50rpx;
-}
-
-.text-area {
-  display: flex;
-  justify-content: center;
-}
-
-.title {
-  font-size: 36rpx;
-  color: #8f8f94;
-}
-</style>
