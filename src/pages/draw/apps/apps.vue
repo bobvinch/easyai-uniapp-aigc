@@ -85,7 +85,7 @@ const currentProgress = computed(() => {
   if (!excuTask) {
     return '空闲'
   }
-  return excuTask.progress + '%'
+  return excuTask.progress ===undefined ? '0%' : excuTask.progress + '%'
 })
 
 

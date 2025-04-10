@@ -55,10 +55,6 @@ export default function useWorkFlow() {
   /** 工作流的参数列表 */
   const params_component_list = [
     { param: 'seed', component: 'Seed', title: '随机种子' },
-    { param: 'seed_2', component: 'Seed', title: '随机种子' },
-    { param: 'seed_3', component: 'Seed', title: '随机种子' },
-    { param: 'seed_4', component: 'Seed', title: '随机种子' },
-    { param: 'seed_5', component: 'Seed', title: '随机种子' },
     { param: 'ckpt_name', component: 'ModeSelect', title: '大模型选择' },
     { param: 'positive', component: 'Positive', title: '正向提示词' },
     { param: 'width', component: 'Width', title: '图片宽度' },
@@ -68,6 +64,7 @@ export default function useWorkFlow() {
     { param: 'image_path_mask', component: 'ImageUpload', title: '遮罩上传' },
     { param: 'image_path_face', component: 'ImageUpload', title: '参考上传' },
     { param: 'image_path_style', component: 'ImageUpload', title: '参考上传' },
+    { param: 'image_path', component: 'ImageUpload', title: '参考上传' },
     {
       param: 'advance_select_image_preview',
       component: 'ImageSelectPreview',
@@ -101,7 +98,7 @@ export default function useWorkFlow() {
 
   /** 根据参数名称找组件名称  */
   const handleFindComponentName = (param: keyof IComfyUIProperties) => {
-    const component = params_component_list.find(item => item.param === param)
+    const component = params_component_list.find(item => param.startsWith(item.param))
     return component?.component
   }
 
