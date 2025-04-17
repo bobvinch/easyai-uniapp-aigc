@@ -21,7 +21,7 @@ const props = withDefaults(defineProps<Props>(), {
   options: {}
 })
 const getSeed = () => {
-  inputValue.value = generateRandomNumber(15)
+  inputValue.value = generateRandomNumber(9)
 }
 onLoad(() => {
   console.log('Seed page onLoad')
