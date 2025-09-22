@@ -145,11 +145,11 @@ export default function useWorkFlow() {
       throw new Error('未登录状态，不允许初始化Websocket')
     }
     console.log('socket init execution，status', socketState.socket?.readyState)
-    if (socketState?.isInitialized && socketState.options?.params?.type === options.params?.type) {
+    if (socketState?.isInitialized && socketState.options?.params?.type === options?.params?.type) {
       console.log('WebSocket is already initialized')
       return
     }
-    if (socketState?.isInitialized && socketState?.options.params?.type !== options.params?.type) {
+    if (socketState?.isInitialized && socketState?.options?.params?.type !== options?.params?.type) {
       //说明场景不一样，需要重新初始化
       console.log('WebSocket is already initialized,but scene is different,reinitialize')
       await closeSocketAsync()
